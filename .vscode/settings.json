@@ -1,3 +1,45 @@
+// {
+//     "python.pythonPath": "/home/zack/.local/share/virtualenvs/property-ukT-k0rC/bin/python"
+// }
+
+
 {
-    "python.pythonPath": "/home/zack/.local/share/virtualenvs/property-ukT-k0rC/bin/python"
+    // Interpreter
+    "python.pythonPath": "/home/zack/.pyenv/versions/3.7.1/bin/python",
+    "python.envFile": "${workspaceFolder}/.env",
+
+    // Linting
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+
+    // Search
+    "search.exclude": {
+        "**/.git": true,
+        "**/.vscode": true,
+        "**/node_modules": true,
+        "**/static": true,
+        "**/media": true,
+        "**/logs": true,
+        "**/tmp": true,
+        "**/locale": true,
+    },
+    "search.showLineNumbers": true,
+
+    // Eslint
+    "eslint.options": {
+        "configFile": ".eslintrc.json"
+    },
+    "eslint.nodePath": "assets/node_modules/",
+    "eslint.workingDirectories": [
+        "assets/"
+    ],
+    "eslint.autoFixOnSave": true,
+
+    // Stylelint
+    "css.validate": false,
+    "less.validate": false,
+    "scss.validate": false,
+    "stylelint.enable": true,
+    "stylelint.autoFixOnSave": true
 }

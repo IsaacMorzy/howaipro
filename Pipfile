@@ -4,11 +4,27 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+django-debug-toolbar = "*"
 
 [packages]
 django = "==2.2.6"
 psycopg2 = "*"
-django-registration-redux = "*"
+django-environ = "*"
+django-extensions = "*"
+celery = "*"
+sentry-sdk = "*"
+dj-database-url = "*"
+django-webpack-loader = "*"
+django-allauth = "*"
+pillow = "*"
+werkzeug = "*"
+pyopenssl = "*"
+django-crispy-forms = "*"
 
 [requires]
 python_version = "3.7"
+
+[scripts]
+server = "python manage.py runserver"
+migrate= "python manage.py migrate"
+migratessl="python manage.py runserver_plus --cert-file /tmp/cert"

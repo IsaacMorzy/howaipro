@@ -10,40 +10,405 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
+#  import os
+# import environ
+
+# env = environ.Env.read_env()
+
+# root_path = environ.Path(__file__) - 2
+
+# # -----------------------------------------------------------------------------
+# # Basic Config
+# # -----------------------------------------------------------------------------
+# ENV = env('ENV', default='dev')
+# assert ENV in ['dev', 'test', 'prod', 'qa']
+# DEBUG = env.bool('DEBUG', default=True)
+# BASE_DIR = root_path()
+# ROOT_URLCONF = 'conf.urls'
+# WSGI_APPLICATION = 'conf.wsgi.application'
+
+
+# # -----------------------------------------------------------------------------
+# # Time & Language
+# # -----------------------------------------------------------------------------
+# LANGUAGE_CODE = env('LANGUAGE_CODE', default='en-us')
+# TIME_ZONE = env('TIMEZONE', default='UTC')
+# USE_I18N = env('USE_I18N', default=True)
+# USE_L10N = env('USE_L10N', default=True)
+# USE_TZ = env('USE_TZ', default=True)
+
+# #-----------------------------------------------------------------------------
+# #Emails
+# #-----------------------------------------------------------------------------
+# DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='')
+# EMAIL_BACKEND = env(
+#     'EMAIL_BACKEND',
+#     default='django.core.mail.backends.smtp.EmailBackend')
+
+
+# #-----------------------------------------------------------------------------
+# #Applications configuration
+# #-----------------------------------------------------------------------------
+
+# INSTALLED_APPS = [
+#    #first party
+#     'django.contrib.auth',
+#     'django.contrib.contenttypes',
+#     'django.contrib.sessions',
+#     'django.contrib.messages',
+#     'django.contrib.staticfiles',
+
+#     #Third party
+#     'registration',
+    
+#     #local
+#     'apps.users',
+#     'apps.core',
+#     'conf.apps.CustomAdminConfig'
+
+# ]
+
+# if ENV == 'dev':
+#     INSTALLED_APPS += [
+#         'django_extensions',
+#     ]
+
+
+# MIDDLEWARE = [
+#     'django.middleware.security.SecurityMiddleware',
+#     'django.contrib.sessions.middleware.SessionMiddleware',
+#     'django.middleware.common.CommonMiddleware',
+#     'django.middleware.csrf.CsrfViewMiddleware',
+#     'django.contrib.auth.middleware.AuthenticationMiddleware',
+#     'django.contrib.messages.middleware.MessageMiddleware',
+#     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+# ]
+
+
+# TEMPLATES = [
+#     {
+#         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+#         'DIRS': [
+#             root_path('templates')
+#         ],
+#         'APP_DIRS': True,
+#         'OPTIONS': {
+#             'context_processors': [
+#                 'django.template.context_processors.debug',
+#                 'django.template.context_processors.request',
+#                 'django.contrib.auth.context_processors.auth',
+#                 'django.contrib.messages.context_processors.messages',
+#             ],
+#         },
+#     },
+# ]
+
+
+
+
+# # -----------------------------------------------------------------------------
+# # Celery
+# # -----------------------------------------------------------------------------
+# CELERY_BROKER_URL = env('CELERY_BROKER_URL', default='redis://cache')
+# CELERY_TASK_ALWAYS_EAGER = env('CELERY_TASK_ALWAYS_EAGER', default=False)
+
+
+# # -----------------------------------------------------------------------------
+# # Security and Users
+# # -----------------------------------------------------------------------------
+# SECRET_KEY = env('SECRET_KEY')
+
+# ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
+
+# AUTH_USER_MODEL = 'users.User'
+
+# AUTH_PASSWORD_VALIDATORS = [
+#     {
+#         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+#     },
+#     {
+#         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+#     },
+#     {
+#         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+#     },
+#     {
+#         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+#     },
+# ]
+
+# AUTHENTICATION_BACKENDS = (
+#     'django.contrib.auth.backends.ModelBackend',
+# )
+# LOGIN_URL = env('LOGIN_URL', default='/login/')
+# LOGIN_REDIRECT_URL = env('LOGIN_REDIRECT_URL', default='/')
+# ACCOUNT_ACTIVATION_DAYS = env.int('ACCOUNT_ACTIVATION_DAYS', default=7)
+# REGISTRATION_OPEN = env.bool('REGISTRATION_OPEN', default=True)
+# REGISTRATION_AUTO_LOGIN = env.bool('REGISTRATION_AUTO_LOGIN', default=True)
+
+# # -----------------------------------------------------------------------------
+# # Databases
+# # -----------------------------------------------------------------------------
+# DJANGO_DATABASE_URL = env.db('DATABASE_URL')
+# DATABASES = {'default': DJANGO_DATABASE_URL}
+
+
+# # -----------------------------------------------------------------------------
+# # Static & Media Files
+# # -----------------------------------------------------------------------------
+# STATIC_URL = env('STATIC_URL', default='/static/')
+# STATIC_ROOT = root_path('static')
+
+# MEDIA_URL = env('MEDIA_URL', default='/media/')
+# MEDIA_ROOT = root_path('media')
+# ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+
+# STATICFILES_DIRS = (
+#     ('bundles', root_path('assets/bundles')),
+#     ('img', root_path('assets/img')),
+# )
+# #-----------------------------------------------------------------------------
+# #Django Debug Toolbar
+# #-----------------------------------------------------------------------------
+
+# USE_DEBUG_TOOLBAR = env.bool('USE_DEBUG_TOOLBAR', default=DEBUG)
+
+# if USE_DEBUG_TOOLBAR:
+#     INSTALLED_APPS += ['debug_toolbar']
+#     INTERNAL_IPS = ['127.0.0.1']
+#     MIDDLEWARE.insert(
+#         0,
+#         'debug_toolbar.middleware.DebugToolbarMiddleware'
+#     )
+
+
+# -----------------------------------------------------------------------------
+# Logging
+# -----------------------------------------------------------------------------
+# LOGS_ROOT = env('LOGS_ROOT', default=root_path('logs'))
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'formatters': {
+#         'console_format': {
+#             'format': '%(name)-12s %(levelname)-8s %(message)s'
+#         },
+#         'file_format': {
+#             'format': '%(asctime)s %(name)-12s %(levelname)-8s %(message)s'
+#         }
+#     },
+#     'handlers': {
+#         'console': {
+#             'level': 'DEBUG',
+#             'class': 'logging.StreamHandler',
+#             'formatter': 'console_format'
+#         },
+#         'file': {
+#             'level': 'INFO',
+#             'class': 'logging.handlers.RotatingFileHandler',
+#             'filename': os.path.join(LOGS_ROOT, 'django.log'),
+#             'maxBytes': 1024 * 1024 * 15,  # 15MB
+#             'backupCount': 10,
+#             'formatter': 'file_format',
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'level': 'INFO',
+#             'handlers': ['console', 'file'],
+#             'propagate': False,
+#         },
+#         'apps': {
+#             'level': 'DEBUG',
+#             'handlers': ['console', 'file'],
+#             'propagate': False,
+#         }
+
+#     }
+# }
+
+# USE_SENTRY = env.bool('USE_SENTRY', default=False)
+
+# if USE_SENTRY:
+#     import sentry_sdk
+#     from sentry_sdk.integrations.django import DjangoIntegration
+
+#     sentry_sdk.init(
+#         dsn=env('SENTRY_DSN'),
+#         integrations=[DjangoIntegration()],
+#         environment=ENV
+#     )
+
 import os
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+import environ
+
+env = environ.Env()
+root_path = environ.Path(__file__) - 2
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'i#527t81*d66zqas=#odbzdqk5y$ih6=iqqobjs5_fy4yg6k0w'
+# -----------------------------------------------------------------------------
+# Basic Config
+# -----------------------------------------------------------------------------
+ENV = env('ENV', default='dev')
+assert ENV in ['dev', 'test', 'prod', 'qa']
+DEBUG = env.bool('DEBUG', default=False)
+BASE_DIR = root_path()
+ROOT_URLCONF = 'conf.urls'
+WSGI_APPLICATION = 'conf.wsgi.application'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# -----------------------------------------------------------------------------
+# Time & Language
+# -----------------------------------------------------------------------------
+LANGUAGE_CODE = env('LANGUAGE_CODE', default='en-us')
+TIME_ZONE = env('TIMEZONE', default='UTC')
+USE_I18N = env('USE_I18N', default=True)
+USE_L10N = env('USE_L10N', default=True)
+USE_TZ = env('USE_TZ', default=True)
 
-ALLOWED_HOSTS = []
+# -----------------------------------------------------------------------------
+# Emails
+# -----------------------------------------------------------------------------
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='')
+EMAIL_BACKEND = env(
+    'EMAIL_BACKEND',
+    default='django.core.mail.backends.smtp.EmailBackend')
+
+# -----------------------------------------------------------------------------
+# Security and Users
+# -----------------------------------------------------------------------------
+SECRET_KEY = env('SECRET_KEY')
+ALLOWED_HOSTS = ['*']
+AUTH_USER_MODEL = 'users.User'
+AUTH_PASSWORD_VALIDATORS = [
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
+]
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+LOGIN_URL = env('LOGIN_URL', default='/login/')
+LOGIN_REDIRECT_URL = env('LOGIN_REDIRECT_URL', default='home/')
+
+SITE_ID = 1
 
 
-# Application definition
+# -----------------------------------------------------------------------------
+# Databases
+# -----------------------------------------------------------------------------
+DJANGO_DATABASE_URL = env.db('DATABASE_URL')
+DATABASES = {'default': DJANGO_DATABASE_URL}
 
+# -----------------------------------------------------------------------------
+# Applications configuration
+# -----------------------------------------------------------------------------
 INSTALLED_APPS = [
-   
+    # First party
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
-    #local
-    'apps.core',
-    'conf.apps.CustomAdminConfig'
 
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
+    
+    # Third party
+    
+    
+    'webpack_loader',
+    'crispy_forms',
+
+   
+    # should be inmediatly above admin
+
+    # Local
+    'conf.apps.CustomAdminConfig',
+    'apps.misc',
+    'apps.users',
 ]
 
+
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS =1
+
+ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
+
+ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400 # 1 day in seconds
+
+ACCOUNT_LOGOUT_REDIRECT_URL ='/accounts/login/'
+
+LOGIN_REDIRECT_URL = '/accounts/email ' 
+
+# ACCOUNT_ADAPTER = 'users.adapter.CustomProcessAdapter'
+
+ACCOUNT_ALLOW_REGISTRATION = env.bool('ACCOUNT_ALLOW_REGISTRATION', True)
+# https://django-allauth.readthedocs.io/en/latest/configuration.html
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
+# https://django-allauth.readthedocs.io/en/latest/configuration.html
+ACCOUNT_EMAIL_REQUIRED = True
+# https://django-allauth.readthedocs.io/en/latest/configuration.html
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+# https://django-allauth.readthedocs.io/en/latest/configuration.html
+# ACCOUNT_ADAPTER = 'bootcamp.users.adapters.AccountAdapter'
+# https://django-allauth.readthedocs.io/en/latest/configuration.html
+# SOCIALACCOUNT_ADAPTER = 'b.users.adapters.SocialAccountAdapter'
+
+
+# Social Account Settings
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook': {
+        'METHOD': 'oauth2',
+        'SCOPE': ['email', 'public_profile', 'user_friends'],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        'INIT_PARAMS': {'cookie': True},
+        'FIELDS': [
+            'id',
+            'email',
+            'name',
+            'first_name',
+            'last_name',
+            'verified',
+            'locale',
+            'timezone',
+            'link',
+            'gender',
+            'updated_time',
+        ],
+        'EXCHANGE_TOKEN': True,
+        'LOCALE_FUNC': lambda request: 'en_US',
+        'VERIFIED_EMAIL': False,
+        'VERSION': 'v2.12',
+    },
+     'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
+SOCIALACCOUNT_QUERY_EMAIL=ACCOUNT_EMAIL_REQUIRED
+SOCIALACCOUNT_EMAIL_REQUIRED=ACCOUNT_EMAIL_REQUIRED
+SOCIALACCOUNT_STORE_TOKENS=False
+
+
+
+if ENV == 'dev':
+    INSTALLED_APPS += [
+        'django_extensions',
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -55,12 +420,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'conf.urls'
+
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            root_path('templates')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -68,61 +435,118 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'apps.misc.context_processors.django_settings',
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'conf.wsgi.application'
+# -----------------------------------------------------------------------------
+# Celery
+# -----------------------------------------------------------------------------
+CELERY_BROKER_URL = env('CELERY_BROKER_URL', default='redis://cache')
+CELERY_TASK_ALWAYS_EAGER = env('CELERY_TASK_ALWAYS_EAGER', default=False)
+
+# -----------------------------------------------------------------------------
+# Static & Media Files
+# -----------------------------------------------------------------------------
+STATIC_URL = env('STATIC_URL', default='/static/')
+STATIC_ROOT = root_path('static')
 
 
-# Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'state',
-        'USER': 'restate',
-        'PASSWORD': 'state',
-        'HOST': 'localhost',
-        'PORT': '',
+MEDIA_URL = env('MEDIA_URL', default='/media/')
+MEDIA_ROOT = env('MEDIA_ROOT', default=root_path('media'))
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+
+STATICFILES_DIRS = (
+    ('bundles', root_path('assets/bundles')),
+    ('img', root_path('assets/img')),
+)
+
+webpack_stats_filename = 'webpack-bundle.%s.json' % ENV
+stats_file = os.path.join(root_path('assets/bundles/'), webpack_stats_filename)
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'CACHE': not DEBUG,
+        'BUNDLE_DIR_NAME': 'bundles/',  # must end with slash
+        'STATS_FILE': stats_file,
+        'POLL_INTERVAL': 0.1,
+        'TIMEOUT': None,
+        'IGNORE': ['.+\.hot-update.js', '.+\.map']
     }
 }
 
-# Password validation
-# https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+
+# -----------------------------------------------------------------------------
+# Django Debug Toolbar
+# -----------------------------------------------------------------------------
+USE_DEBUG_TOOLBAR = env.bool('USE_DEBUG_TOOLBAR', default=DEBUG)
+
+if USE_DEBUG_TOOLBAR:
+    INSTALLED_APPS += ['debug_toolbar']
+    INTERNAL_IPS = ['127.0.0.1']
+    MIDDLEWARE.insert(
+        0,
+        'debug_toolbar.middleware.DebugToolbarMiddleware'
+    )
+
+
+# -----------------------------------------------------------------------------
+# Logging
+# -----------------------------------------------------------------------------
+LOGS_ROOT = env('LOGS_ROOT', default=root_path('logs'))
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'console_format': {
+            'format': '%(name)-12s %(levelname)-8s %(message)s'
+        },
+        'file_format': {
+            'format': '%(asctime)s %(name)-12s %(levelname)-8s %(message)s'
+        }
     },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'console_format'
+        },
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(LOGS_ROOT, 'django.log'),
+            'maxBytes': 1024 * 1024 * 15,  # 15MB
+            'backupCount': 10,
+            'formatter': 'file_format',
+        },
     },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
+    'loggers': {
+        'django': {
+            'level': 'INFO',
+            'handlers': ['console', 'file'],
+            'propagate': False,
+        },
+        'apps': {
+            'level': 'DEBUG',
+            'handlers': ['console', 'file'],
+            'propagate': False,
+        }
 
+    }
+}
 
-# Internationalization
-# https://docs.djangoproject.com/en/2.2/topics/i18n/
+USE_SENTRY = env.bool('USE_SENTRY', default=True)
 
-LANGUAGE_CODE = 'en-us'
+if USE_SENTRY:
+    import sentry_sdk
+    from sentry_sdk.integrations.django import DjangoIntegration
 
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_L10N = True
-
-USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
-
-STATIC_URL = '/static/'
+    sentry_sdk.init(
+        dsn=env('SENTRY_DSN'),
+        integrations=[DjangoIntegration()],
+        environment=ENV
+    )
+    
