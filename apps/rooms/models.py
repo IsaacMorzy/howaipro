@@ -1,14 +1,14 @@
-from django.db import 
-
-from users import models as user_models
+from django.db import  models
+# from users import models as user_models
+from django_countries.fields import CountryField
 
 # Create your models here.
-from core import models as core_models
+# from core import models as core_models
 
-class Room(core_models.TimeStampedModel):
+class Room():
 
     """ Room Model Definition """
-    
+
     name = models.CharField(max_length=140)
     description = models.TextField()
     country = CountryField()
@@ -22,4 +22,4 @@ class Room(core_models.TimeStampedModel):
     check_in = models.TimeField()
     check_out = models.TimeField()
     instant_book = models.BooleanField(default=False)
-    host = models.ForeignKey(user_models.User, on_delete=models.CASCADE)
+

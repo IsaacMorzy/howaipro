@@ -310,6 +310,7 @@ DATABASES = {'default': DJANGO_DATABASE_URL}
 # -----------------------------------------------------------------------------
 INSTALLED_APPS = [
     # First party
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.sites',
     'django.contrib.contenttypes',
@@ -328,16 +329,14 @@ INSTALLED_APPS = [
     
     'webpack_loader',
     'crispy_forms',
-
-   
-    # should be inmediatly above admin
+    'django_countries',
 
     # Local
-    'conf.apps.CustomAdminConfig',
     'apps.misc',
-    'apps.users',
     'apps.rooms',
-
+    'apps.users',
+    'apps.reservations',
+    
 ]
 
 
