@@ -1,7 +1,5 @@
 
-
 from django.contrib.auth.models import AbstractUser
-from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _

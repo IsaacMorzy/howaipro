@@ -20,6 +20,7 @@ pillow = "*"
 werkzeug = "*"
 pyopenssl = "*"
 django-crispy-forms = "*"
+django-countries = "*"
 
 [requires]
 python_version = "3.7"

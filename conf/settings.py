@@ -336,6 +336,8 @@ INSTALLED_APPS = [
     'conf.apps.CustomAdminConfig',
     'apps.misc',
     'apps.users',
+    'apps.rooms',
+
 ]
 
 
@@ -353,7 +355,7 @@ LOGIN_REDIRECT_URL = '/accounts/email '
 
 ACCOUNT_ALLOW_REGISTRATION = env.bool('ACCOUNT_ALLOW_REGISTRATION', True)
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_AUTHENTICATION_METHOD = 'username'
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_EMAIL_REQUIRED = True
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
